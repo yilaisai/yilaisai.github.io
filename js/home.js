@@ -1,10 +1,10 @@
 ~function(){
     var obj = {
         $topBar : $(".top_bar"),
-        $nav : $(".nav")
+        $nav : $(".nav"),
+        $banner : $(".banner")
     };
     var index = {
-
             /*导航hover*/
             topBar: function(){
                 var $lastList = obj.$topBar.find(".bar ul .lastList"),
@@ -54,7 +54,6 @@
                     }
                 })
             },
-
             /*角色切换*/
             role_pop :function(){
                 var $role1 = obj.$nav.find(".nav_container .role1 img"),
@@ -108,9 +107,106 @@
                     $sideBarHide.eq($(this).index()).stop().slideUp(300);
                 })
             },
+            /*轮播*/
             banner : function(){
+                var banner = {
+                    banner_pro : function(){
+                        function Banner($ul,$li,$tab){
+                            this.$ul = $ul;
+                            this.$li = $li;
+                            this.$tab = $tab;
+                            this.index = 0;
+                            this.length = $li.length;
+                            this.width = $li.width();
+                            this.timeOut = null;
+                        }
+                        Banner.prototype = {
+                            exe : function(){
+                                this.addEvent();
+                            },
+                            addEvent : function(){
+                                var This = this;
+                                This.$tab.mouseenter(function(){
+                                    clearTimeout(This.timeOut);
+                                    var $This = $(this);
+                                    This.index = $This.index();
+                                    This.timeOut = setTimeout(function(){
+                                        $This.addClass("on").siblings().removeClass("on");
+                                        This.$ul.animate({left:(-This.index*This.width)},300);
+                                    },300)
+                                })
+                            }
+                        };
+                        /*banner左边图片自动轮播*/
+                        function Banner2($ul,$li,$tab,$banner){
+                            Banner.call(this,$ul,$li,$tab);
+                            this.$banner = $banner;
+                            this.timer = null;
+                        }
+                        function Fn(){}
+                        Fn.prototype = Banner.prototype;
+                        Banner2.prototype = Fn.prototype;
+                        Banner2.prototype.stmp = Banner2.prototype.exe;
+                        Banner2.prototype.exe = function(){
+                            this.stmp();
+                            this.clear();
+                            this.auto();
+                        };
+                        Banner2.prototype.auto = function(){
+                            var This = this;
+                            this.timer = setInterval(function(){
+                                This.index++;
+                                This.index %=This.length;
+                                This.$tab.eq(This.index).addClass("on").siblings().removeClass("on");
+                                This.$ul.animate({left:(-This.index*This.width)},300);
+                            },3000);
+                        };
+                        Banner2.prototype.clear = function(){
+                            var This = this;
+                            This.$banner.hover(function(){
+                                clearInterval(This.timer);
+                            },function(){
+                                This.auto()
 
-                /*Banner构造函数*/
+                            })
+                        };
+                        window.Banner2 = Banner2;
+                        window.Banner = Banner;
+                    },
+                    banner2 : function(){
+                        var $banner_left = obj.$banner.find(".banner_left"),
+                            $ul = $banner_left.find("ul"),
+                            $li = $ul.find("li"),
+                            $tab = $banner_left.find(".banner_left_table a"),
+                            autoBanner = new Banner2($ul,$li,$tab,$banner_left);
+                            autoBanner.exe();
+                    },
+                    banner3 : function(){
+                        var $banner_right = obj.$banner.find(".banner_right"),
+                            $ul = $banner_right.find(".banner_right_pic .big_ul"),
+                            $li = $ul.children(),
+                            $tab = $banner_right.find(".banner_right_table a");
+                        $li.each(function(i){
+                            var $ul = $("<ul class='mini_ul'></ul>");
+                            var num = 0;
+                            for (var j=0,length=data.length;j<length;j++){
+                                if (!i || data[j].typeX === (i-1) ){
+                                    $ul.append("<li><a href=''>"+data[j].title+"</a><span>"+data[j].time+"</span></li>");
+                                    index++;
+                                    if(num === 5) break;
+                                }
+                            }
+                            $(this).append($ul);
+                        });
+                        var banner = new Banner($ul,$li,$tab);
+                            banner.exe();
+                    }
+                };
+                banner.banner_pro();
+                banner.banner2();
+                banner.banner3();
+
+                /*/!*Banner构造函数*!/
                 function Banner($ul,$li,$tab){
                     this.$ul = $ul;
                     this.$li = $li;
@@ -139,7 +235,7 @@
                     }
                 };
 
-                /*图片轮播*/
+                /!*banner左边图片轮播*!/
                 function Banner2($ul,$li,$tab,$banner){
                     Banner.call(this,$ul,$li,$tab);
                     this.$banner = $banner;
@@ -161,7 +257,7 @@
                         This.index %=This.length;
                         This.$tab.eq(This.index).addClass("on").siblings().removeClass("on");
                         This.$ul.animate({left:(-This.index*This.width)},300);
-                    },2000);
+                    },3000);
                 };
                 Banner2.prototype.clear = function(){
                     var This = this;
@@ -171,12 +267,21 @@
                         This.auto()
                     })
                 };
-                var $banner = $(".banner").find(".banner_left"),
-                    $ul = $banner.find("ul"),
+                var $banner = $(".banner"),
+                    $banner_left = $banner.find(".banner_left"),
+                    $ul = $banner_left.find("ul"),
                     $li = $ul.find("li"),
-                    $tab = $banner.find(".banner_left_table a");
-                    bannerLeft = new Banner2($ul,$li,$tab,$banner);
+                    $tab = $banner_left.find(".banner_left_table a");
+                    bannerLeft = new Banner2($ul,$li,$tab,$banner_left);
                 bannerLeft.exe();
+
+                /!*banner右边新闻轮播*!/
+                function Banner3($ul,$li,$tab){
+                    Banner.call(this,$ul,$li,$tab)
+                }
+                Banner3.prototype = Fn.prototype;
+                var $banner_right = $banner.find(".banner_right"),
+                    $banner_right_table =*/
             }
         };
     index.topBar();

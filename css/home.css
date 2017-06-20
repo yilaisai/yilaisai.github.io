@@ -12,7 +12,7 @@ body {
 .new,.hot,.icon,.serverList .plan>h3,.download .right_item,.download .font-item,.down_ios ,.down_and,
 .sidebar_title,.sidebar_list_show,.sidebar_list_hide,.tiaozhan_top,.tiaozhan_btm,.jijie_top,.jijie_btm,
 .shishen_top,.shishen_btm,.yuhun_top,.yuhun_btm, .tiaozhan2_top, .tiaozhan2_btm,.hunter_top,.jiejie_top,
-.xuanshang_top {
+.xuanshang_top,.news_table span,.news_table i {
     background-image: url(../images/index/index.png);
 }
 .home {
@@ -902,9 +902,9 @@ li .item_top9 {
     height:270px;
     padding:40px 0;
     margin-left:-700px;
-    background:rgba(0,0,0,.2);
 }
 .banner .banner_left {
+    float:left;
     position: relative;
     width:360px;
     height:270px;
@@ -947,8 +947,125 @@ li .item_top9 {
 .banner .banner_left .banner_left_table a.on {
     background:#e37b63;
 }
-
-
+.banner .banner_right {
+    float:left;
+    position: relative;
+    width:505px;
+    height:100%;
+    margin-left:35px;
+    overflow:hidden;
+}
+.banner .banner_right_table {
+    width:100%;
+    height:45px;
+    border-bottom:2px solid #000;
+}
+.banner .banner_right_table .news_table {
+    display:block;
+    float:left;
+    position:relative;
+    width:74px;
+    margin-right:15px;
+    height:100%;
+}
+.banner .banner_right_table .news_table span {
+    position:relative;
+    display:block;
+    width:44px;
+    height:30px;
+    margin:0 auto;
+    z-index:2;
+}
+.banner .banner_right_table .news_table b {
+    display:block;
+    position:absolute;
+    top:15px;
+    left:0;
+    width:74px;
+    height:33px;
+    background:#68D7FC;
+    border-radius: 25px;
+    opacity:0;
+    transition: 0.5s;
+}
+.banner .banner_right_table .news_table.on b {
+    top:5px;
+    opacity:1;
+}
+.banner .banner_right_table .news_table i {
+    display:block;
+    position: absolute;
+    top:7px;
+    right:-15px;
+    width:17px;
+    height:28px;
+    background-position: -1542px -1440px;
+}
+.banner .banner_right_table .lastNews span {
+    background-position: -1400px -1152px;
+}
+.banner .banner_right_table .news span {
+    background-position: -1400px -1030px;
+}
+.banner .banner_right_table .notice span {
+    background-position: -1400px -1092px;
+}
+.banner .banner_right_table .active span {
+    background-position: -1400px -1122px;
+}
+.banner .banner_right_table .media span {
+    background-position: -1400px -1062px;
+}
+.banner .banner_right_pic {
+    position:relative;
+    width:100%;
+    height:205px;
+    margin-top:3px;
+    border-top:1px solid #000;
+    overflow: hidden;
+}
+.banner .banner_right_pic .big_ul {
+    position:absolute;
+    top:0;
+    left:0;
+    width:1000%;
+    height:100%;
+}
+.banner .banner_right_pic .big_ul li {
+    float:left;
+    width:10%;
+    height:100%;
+}
+.banner .banner_right_pic .mini_ul {
+    width:100%;
+    height:100%;
+}
+.banner .banner_right_pic .mini_ul li {
+    position:relative;
+    width:100%;
+    height:40px;
+    line-height:40px;
+    border-bottom:1px dotted #333;
+}
+.banner .banner_right_pic .mini_ul li a {
+    float:left;
+    font-size:14px;
+    color:#333;
+    width:80%;
+    height:100%;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.banner .banner_right_pic .mini_ul li a:hover {
+    color:#C1831C;
+}
+.banner .banner_right_pic .mini_ul li span {
+    float:right;
+    color:#bccddc;
+    font-size:12px;
+    line-height:40px;
+}
 
 
 
