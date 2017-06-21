@@ -12,8 +12,11 @@ body {
 .new,.hot,.icon,.serverList .plan>h3,.download .right_item,.download .font-item,.down_ios ,.down_and,
 .sidebar_title,.sidebar_list_show,.sidebar_list_hide,.tiaozhan_top,.tiaozhan_btm,.jijie_top,.jijie_btm,
 .shishen_top,.shishen_btm,.yuhun_top,.yuhun_btm, .tiaozhan2_top, .tiaozhan2_btm,.hunter_top,.jiejie_top,
-.xuanshang_top,.news_table span,.news_table i {
+.xuanshang_top,.news_table span,.news_table i,.shishen_table_top .pingan {
     background-image: url(../images/index/index.png);
+}
+.shishen_table_top .sperdate_dot,.ss span,.ss em,.zhujue span,.zhujue em {
+    background-image: url(../images/index/index2.png);
 }
 .home {
     position:relative;
@@ -22,7 +25,6 @@ body {
     margin:0 auto;
     background:#fff;
     overflow:hidden;
-    height:2000px;
 }
 
 /*导航列表*/
@@ -1067,7 +1069,81 @@ li .item_top9 {
     line-height:40px;
 }
 
-
+/*shishen_table*/
+.shishen_table {
+    position:relative;
+    left:50%;
+    margin-left:-960px;
+    width:1920px;
+    height:601px;
+    background:url(../images/index/bg1.jpg);
+}
+.shishen_table_top {
+    width:1200px;
+    height:96px;
+    margin:0 auto;
+    margin-bottom:42px;
+}
+.shishen_table_top .pingan {
+    display:block;
+    float:left;
+    width:130px;
+    height:70px;
+    background-position: -411px -587px;
+    margin-top:15px;
+}
+.shishen_table_top .sperdate_dot {
+    display:block;
+    float:left;
+    width:45px;
+    height:4px;
+    margin:48px 10px 0;
+    background-position: -1505px -792px;
+}
+.shishen_table_top .ss,.zhujue {
+    display:block;
+    float:left;
+    position:relative;
+    width:98px;
+    height:95px;
+    cursor:pointer;
+}
+.shishen_table_top .ss span {
+    display:block;
+    position:relative;
+    width:76px;
+    height:33px;
+    background-position: -994px -608px;
+    margin:31px auto 0;
+    z-index:2;
+}
+.shishen_table_top .zhujue span {
+    display:block;
+    position:relative;
+    width:64px;
+    height:40px;
+    background-position: -930px -608px;
+    margin:28px auto 0;
+    z-index:2;
+}
+.shishen_table_top .ss em,.zhujue em {
+    position:absolute;
+    top:14px;
+    left:-2px;
+    width:96px;
+    height:91px;
+    background-position: -939px -1297px;
+    opacity:0;
+    transition: 0.5s;
+}
+.shishen_table_top a.on em {
+    top:4px;
+    opacity:1;
+}
+.shishen_table_top a:hover em {
+    top:4px;
+    opacity:1;
+}
 
 
 
