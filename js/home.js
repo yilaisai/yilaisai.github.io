@@ -2,7 +2,9 @@
     var obj = {
         $topBar : $(".top_bar"),
         $nav : $(".nav"),
-        $banner : $(".banner")
+        $banner : $(".banner"),
+        $ssTable :$(".shishen_table"),
+        $gonglue : $(".gonglue")
     };
     var index = {
             /*导航hover*/
@@ -167,6 +169,8 @@
                         This.auto()
                     })
                 };
+
+                /*增加新的轮播*/
                 var mainBanner = {
                     banner2 : function(){
                         var $banner_left = obj.$banner.find(".banner_left"),
@@ -195,26 +199,118 @@
                         });
                         var banner = new Banner($ul,$li,$tab,$banner_right);
                         banner.exe();
+                    },
+                    banner4 : function(){
+                        var $que = obj.$gonglue.find(".gonglue_left .searchBody .question"),
+                            $ul = $que.find(".question_pic ul"),
+                            $li = $ul.children(),
+                            $tab = $que.find(".question_table a");
+                        var gongluebanner = new Banner($ul,$li,$tab);
+                        gongluebanner.exe();
                     }
                 };
                 mainBanner.banner2();
                 mainBanner.banner3();
+                mainBanner.banner4();
             },
-            /*式神&主角介绍*/
-            introduce : function(){
-                var $ssTable = $(".shishen_table"),
-                    $table = $ssTable.find(".shishen_table_top a");
-
+            /*式神介绍*/
+            ssIntroduce : function(){
+                var $table = obj.$ssTable.find(".shishen_table_top a"),
+                    $mainBtm = obj.$ssTable.find(".shishen_table_btm .sszjList"),
+                    $ssBtm = obj.$ssTable.find(".shishen_table_btm .ssList"),
+                    $ssBtmMain = $ssBtm.find("ul .list"),
+                    $ssBtmList= $ssBtm.find(".ssList_btm ul li .ss_container"),
+                    $lv_table = $ssBtm.find(".ssList_top .lv_table a");
+                /*生成所有式神*/
+                var count = [
+                    [0,null],
+                    [0,null],
+                    [0,null],
+                    [0,null],
+                    [0,null]
+                ];
+                for (var i=0,length =shishenData.length ;i<length;i++){
+                    var index=0;
+                    switch (shishenData[i].level){
+                        case "SSR":
+                            index = 1;
+                            break;
+                        case "SR":
+                            index = 2;
+                            break;
+                        case "R":
+                            index = 3;
+                            break;
+                        case "N":
+                            index = 4;
+                            break;
+                    }
+                    count[0][0]++;
+                    count[index][0]++;
+                    if(count[0][0]%2){
+                        count[0][1] = $("<li></li>");
+                        $ssBtmList.eq(0).append(count[0][1]);
+                    }
+                    if(count[index][0]%2){
+                        count[index][1] = $("<li></li>");
+                        $ssBtmList.eq(index).append(count[index][1]);
+                    }
+                    var str = shishenData[i].isNew?"<em></em>":"";
+                    $div = $("<div class='ss_details'><span><b>"+shishenData[i].name+"</b></span><img src='images/index/ss/"+shishenData[i].id+".png'>"+str+"</div>");
+                    $clone = $div.clone();
+                    count[0][1].append($div);
+                    count[index][1].append($clone);
+                }
                 $table.click(function(){
+                    var i = $(this).index(".shishen_table_top a");
                     $(this).addClass("on").siblings().removeClass("on");
+                    $mainBtm.eq(i).addClass("on").siblings().removeClass("on");
+                });
+                $lv_table.click(function(){
+                    $(this).addClass("on").siblings().removeClass("on");
+                    $ssBtmMain.eq($(this).index()).addClass("on").siblings().removeClass("on");
+                });
+
+                /*式神左右按钮*/
+                $ssBtmMain.each(function(){
+                    var $btn = $(this).children(".btnItem"),
+                        $li = $(this).find(".ss_container li"),
+                        MaxNum = Math.ceil($li.length/6),
+                        index = $(this).index();
+                        this.num = 0;
+                        this.num !==0?$btn.eq(0).show():$btn.eq(0).hide();
+                        this.num !==(MaxNum-1)?$btn.eq(1).show():$btn.eq(1).hide();
+                        $btn.click(function(){
+                            var parent = this.parentNode;
+                            if ($(this).index() ===2 ){
+                                parent.num++;
+                                parent.num = Math.min(parent.num,MaxNum);
+                                $ssBtmList.eq(index).css("marginLeft",-840*parent.num)
+                            }else {
+                                parent.num--;
+                                parent.num = Math.max(0,parent.num);
+                                $ssBtmList.eq(index).css("marginLeft",-840*parent.num)
+                            }
+                            parent.num !==0?$btn.eq(0).show():$btn.eq(0).hide();
+                            parent.num !==(MaxNum-1)?$btn.eq(1).show():$btn.eq(1).hide();
+                        })
                 })
 
+                /*主角切换*/
+                var $zjList= obj.$ssTable.find(".shishen_table_btm .zhujueList"),
+                    $zjTable = $zjList.find(".zhujueTable a"),
+                    $zjPic = $zjList.find(".zhujuePic .picList");
+                $zjTable.click(function(){
+                    $(this).addClass("hover").siblings().removeClass("hover");
+                    $zjPic.eq($(this).index()).addClass("on").siblings().removeClass("on");
+                })
             }
+
         };
     index.topBar();
     index.role_pop();
     index.server_pop();
     index.side_bar();
     index.banner();
-    index.introduce();
+    index.ssIntroduce();
 }();
