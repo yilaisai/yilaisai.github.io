@@ -205,13 +205,60 @@
                             $ul = $que.find(".question_pic ul"),
                             $li = $ul.children(),
                             $tab = $que.find(".question_table a");
-                        var gongluebanner = new Banner($ul,$li,$tab);
-                        gongluebanner.exe();
+                        var banner = new Banner($ul,$li,$tab);
+                        banner.exe();
+                    },
+                    banner5 : function(){
+                        var $gl_right = obj.$gonglue.find(".gonglue_right"),
+                            $rightTop = $gl_right.find(".gonglue_right_top"),
+                            $rightBtm = $gl_right.find(".gonglue_right_btm"),
+                            $b_ul = $rightBtm.find(".l_ul"),
+                            $li = $b_ul.find(".l_li"),
+                            width = $li.width();
+                            $tab = $rightTop.find(".tab_item");
+                        var arr = ["新手" , "式神" , "斗技" , "玩法" , "高阶" , "御魂"];
+                        $li.each(function(i){
+                            var $ul = $("<ul class='s_ul clear'></ul>");
+                            for (var j=0,length=strateData.length;j<length;j++){
+                                var reg = new RegExp(i-1);
+                                var data = strateData[j];
+                                if (!i || reg.test(data.type)){
+                                    var index = !i?data.type.charAt(data.type.length-1):i-1;
+                                    $ul.append("<li class='s_li'><i></i><a href='javascript:void(0)'><p>【"+arr[index]+"】"+data.title+
+                                        "</p><span>作者："+data.author+"</span></a></li>")
+                                }
+                            }
+                            $(this).append($ul);
+                        })
+                        $tab.mouseenter(function(){
+                            var num = $(this).index(".tab_item");
+                            $(this).addClass("on").siblings().removeClass("on");
+                            $b_ul.stop().animate({left:(-num*width)},300);
+                        })
+                    },
+                    banner6 : function(){
+                        var $tongren = $(".tongren"),
+                            $tr_top  =$tongren.find(".tongren_top"),
+                            $tr_btm = $tongren.find(".tongren_btm"),
+                            $pic = $tr_btm.find(".main_tongren"),
+                            $tab = $tr_top.find(".table li"),
+                            $ul = $pic.children();
+                        $ul.each(function(i){
+                            for (var j=0,length = fanData.length;j<length;j++ ){
+                                if (fanData[j].type === i){
+                                    $(this).append("<li><a href='javascript:void(0)'><img src='"+fanData[j].url+"'><span><em class='em_icon'></em></span></a><p>"+fanData[j].title+"</p></li>")
+                                }
+                            }
+                        })
+                        var banner = new Banner($pic,$ul,$tab);
+                        banner.exe();
                     }
                 };
                 mainBanner.banner2();
                 mainBanner.banner3();
                 mainBanner.banner4();
+                mainBanner.banner5();
+                mainBanner.banner6();
             },
             /*式神介绍*/
             ssIntroduce : function(){
@@ -304,8 +351,15 @@
                     $(this).addClass("hover").siblings().removeClass("hover");
                     $zjPic.eq($(this).index()).addClass("on").siblings().removeClass("on");
                 })
+            },
+            returnTop : function(){
+                var $goTop = $(".contact_code .return_top");
+                $goTop.click(function(){
+                    $("html,body").animate({
+                        scrollTop : 0
+                    },300)
+                })
             }
-
         };
     index.topBar();
     index.role_pop();
@@ -313,4 +367,5 @@
     index.side_bar();
     index.banner();
     index.ssIntroduce();
+    index.returnTop();
 }();
