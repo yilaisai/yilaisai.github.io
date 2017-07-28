@@ -1,0 +1,418 @@
+html {
+    font-size:20px;
+}
+.clear:after{display:block;clear:both;content:"\0020";visibility:hidden;height:0;}
+.container {
+    width:100%;
+    max-width:640px;
+	min-width:320px;
+    margin:auto;
+    font-size:0.6rem;
+    padding-bottom:8rem;
+}
+header {
+    position: relative;
+    width:100%;
+    height:2rem;
+    max-height:50px;
+    padding:0.75rem 0;
+    background-color:#02a1fc;
+}
+.warp {
+    position:relative;
+    max-width:580px;
+    height:100%;
+    margin:0 auto;
+    overflow: hidden;
+}
+header .warp .city {
+    position:absolute;
+    left:0;
+    width:4.5rem;
+}
+header .warp .city form {
+    width:100%;
+}
+header .warp .city form select {
+    width:100%;
+    height: 2rem;
+    line-height: 2rem;
+    border:none;
+    background-color:transparent;
+    font-size:1.15rem;
+    color:#fff;
+	appearance:none;  
+	-moz-appearance:none;  
+	-webkit-appearance:none; 
+}
+header .warp .city form  select::-ms-expand { 
+	display: none; 
+} 
+header .warp .city img {
+    position: absolute;
+    right:0;
+    top:50%;
+    margin-top:-0.6rem;
+    width:1.2rem;
+    background-color:#02a1fc;;
+}
+header .warp .search {
+    padding-left:6rem;
+    padding-right:5rem;
+    height:2rem;
+    line-height: 2rem;
+}
+header .warp .search form {
+    width:100%;
+    position:relative;
+}
+header .warp .search form input {
+    width:100%;
+    padding-left:2.5rem;
+    height:1.8rem;
+    line-height: 1.8rem;
+    border:1px solid #fff;
+    border-radius: 15px;
+    color:#fff;
+    background-color: transparent;
+    font-size:1.15rem;
+    outline: none;
+}
+header .warp .search form input:focus {
+    outline: none;
+}
+header .warp .search form img {
+    position:absolute;
+    left:0.4rem;
+    top:50%;
+    margin-top:-0.75rem;
+    width:1.8rem;
+}
+header .warp .scan {
+    position:absolute;
+    right:0.1rem;
+    top:0;
+    width:2.2rem;
+    height:2rem;
+}
+.banner {
+    width:100%;
+    max-height:205px;
+    overflow:hidden;
+}
+.banner ul {
+    width:200%;
+}
+.banner ul li {
+    float:left;
+    width:50%;
+}
+.banner ul li img {
+    max-width:100%;
+}
+
+.details {
+    max-height: 330px;
+    padding:2rem 0;
+    border-bottom:5px solid #e5e5e5;
+}
+.details .b-ul {
+    width:200%;
+}
+.details .b-ul ul {
+    float:left;
+    width:50%;
+    height:100%;
+}
+.details .b-ul ul li {
+    float:left;
+    width:25%;
+    height:6rem;
+    margin-bottom:1.5rem;
+    text-align:center;
+}
+
+.details .b-ul ul li a img {
+    width:4rem;
+    margin:0 auto;
+}
+.details .b-ul ul li a span {
+    display:block;
+    margin-top:0.8rem;
+    font-size:1rem;
+    font-family: "黑体", serif;
+    color:#000;
+}
+
+.more {
+    max-height:420px;
+    padding-bottom:0.5rem;
+    border-bottom:5px solid #e5e5e5;
+}
+.more .more_top {
+    position: relative;
+    height:1rem;
+    line-height:1rem;
+    padding:1rem 0;
+    font-family: "微软雅黑", sans-serif;
+    color:#000;
+    text-align: center;
+}
+.more .more_top .more_top_left{
+    position: absolute;
+    left:0;
+    border-left:5px solid #0c97f8;
+    padding-left:0.5rem;
+    font-size:1rem;
+}
+.more .more_top .more_top_start {
+    font-size:0.9rem;
+}
+.more .more_top .more_top_start b {
+    font-weight: normal;
+    color:#4792f8;
+}
+.more .more_top .more_top_more {
+    position: absolute;
+    right:0;
+    font-size:0.9rem;
+}
+.more .more_content {
+    width:100%;
+    overflow: hidden;
+}
+.more .more_content ul {
+    width:200%;
+    padding-bottom:0.5rem;
+    margin-bottom:1rem;
+}
+.more .more_content ul.line {
+    border-bottom:1px solid #999;
+}
+.more .more_content ul li {
+    float:left;
+    width:12.5%;
+    text-align: center;
+    font-size:0.9rem;
+    font-family: "微软雅黑", sans-serif;
+}
+.more .more_content ul li a {
+    display: block;
+    text-align: center;
+    padding:0 0.2rem;
+}
+.more .more_content ul li a img {
+    max-width:100%;
+}
+.more .more_content ul li a span {
+    display:block;
+    margin-top:0.4rem;
+    color:#999;
+}
+
+.all {
+    max-height:420px;
+    padding-bottom:0.5rem;
+    border-bottom:5px solid #e5e5e5;
+}
+.all .more_top {
+    position: relative;
+    height:1rem;
+    line-height:1rem;
+    padding:1rem 0;
+    font-family: "微软雅黑", sans-serif;
+    color:#000;
+    text-align: center;
+}
+.all .more_top .more_top_left{
+    position: absolute;
+    left:0;
+    border-left:5px solid #0c97f8;
+    padding-left:0.5rem;
+    font-size:1rem;
+}
+.all .more_top .more_top_start {
+    font-size:0.9rem;
+}
+.all .more_top .more_top_start b {
+    font-weight: normal;
+    color:#4792f8;
+}
+.all .more_top .more_top_more {
+    position: absolute;
+    right:0;
+    font-size:0.9rem;
+}
+.all .more_content {
+    width:100%;
+    overflow: hidden;
+}
+.all .more_content ul {
+    width:200%;
+    margin-bottom:1rem;
+}
+.all .more_content ul.line {
+    border-bottom:1px solid #999;
+}
+.all .more_content ul li {
+    float:left;
+    width:12.5%;
+    padding-bottom:2px;
+    text-align: center;
+    font-size:0.9rem;
+    font-family: "微软雅黑", sans-serif;
+}
+.all .more_content ul li.l1 a{
+    background:#f4cad4;
+}
+.all .more_content ul li.l2 a{
+    background:#bbdfdd;
+}
+.all .more_content ul li.l3 a{
+    background:#F1D09B;
+}
+.all .more_content ul li.l4 a{
+    background:#FAD1EF;
+}
+.all .more_content ul li a {
+    display: block;
+    margin:0 0.2rem;
+    text-align: center;
+}
+.all .more_content ul li a p {
+    position:relative;
+    padding:0.4rem;
+    text-align: right;
+    color:#999;
+    font-size:0.7rem;
+    font-family: "微软雅黑", sans-serif;
+}
+.all .more_content ul li a p span {
+    position: absolute;
+    left:0.6rem;
+    color:#fe3d74;
+    font-size:0.8rem;
+    font-weight: bold;
+}
+.all .more_content ul li a img {
+    max-width:100%;
+}
+
+.enjoy {
+    max-width:580px;
+    max-height: 640px;
+    position:relative;
+    margin: 0 auto;
+}
+.enjoy .enjoy_top {
+    position:relative;
+    padding:1.7rem 0 0.7rem;
+    border-bottom:1px solid #cccccc;
+}
+.enjoy .enjoy_top span {
+    padding-left:0.5rem;
+    border-left:5px solid #0c97f8;
+    font-size:1rem;
+    font-family: "微软雅黑", sans-serif;
+}
+.enjoy .enjoy_top a {
+    position:absolute;
+    right:0.2rem;
+    font-size:0.9rem;
+    font-family: "微软雅黑", sans-serif ;
+    color:#666;
+}
+.enjoy .enjoy_content ul {
+    padding:1.2rem 0;
+    border-bottom:1px solid #ccc;
+}
+.enjoy .enjoy_content ul li {
+    padding:0.8rem 0;
+}
+.enjoy .enjoy_content ul li.line {
+    border-top:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+}
+.enjoy .enjoy_content ul li>img {
+    float:left;
+    width:35%;
+    max-width:35%;
+}
+.enjoy .enjoy_content .enjoy_details {
+    float:left;
+    width:60%;
+    padding:0 2.5%;
+}
+.enjoy .enjoy_content .enjoy_details p {
+    position: relative;
+    padding:0.3rem 0 .6rem;
+    font-size:0.9rem;
+    font-family: "微软雅黑", sans-serif;
+    line-height:1.3rem;
+    color:#999;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.enjoy .enjoy_content .enjoy_details .p1 {
+    color:#000000;
+}
+.enjoy .enjoy_content .enjoy_details .p3 {
+    text-align: right;
+}
+.enjoy .enjoy_content .enjoy_details p span {
+    position: absolute;
+    right:0.2rem;
+    color:#999;
+}
+
+.enjoy .enjoy_content .enjoy_details p em {
+    position: absolute;
+    left:0;
+    font-size:0.75rem;
+    font-style: normal;
+    color:#ea0000;
+}
+.enjoy .enjoy_content .enjoy_details p em b {
+    font-size:1.05rem;
+}
+.enjoy .enjoy_btm {
+    margin-top:1.15rem;
+    text-align:center;;
+    font-size:0.9rem;
+    color:#999;
+    font-family: "微软雅黑", sans-serif;
+}
+footer {
+    position:fixed;
+    left:0;
+    bottom:0;
+    width:100%;
+    padding:1rem 0;
+    background:#0b97f8;
+    z-index:99;
+}
+footer .link {
+    max-width:580px;
+    margin:0 auto;
+}
+footer .link ul li {
+    float:left;
+    width:25%;
+    text-align: center;
+}
+footer .link ul li a {
+    display: block;
+    height:2rem;
+    min-height:2rem;
+}
+footer .link ul li a img {
+    width:2rem;
+    max-width: 100%;
+    margin:0 auto;
+}
+footer .link ul li p {
+    color:#fff;
+    font-size:1.04rem;
+    margin-top:0.4rem;
+}

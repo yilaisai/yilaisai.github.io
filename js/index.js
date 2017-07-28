@@ -1,221 +1,142 @@
-!function(){
-    var obj = {
-        $warp: $("#warp"),
-        $newInf : $("#newInf")
-    };
+var $main = $(".main");
+//初始界面
+(function(){
+    var $item1 = $main.find('.inte .item1');
+    setTimeout(function(){
+        $item1.addClass('show');
+    },1000);
+})();
 
-    var home = {
-        fadeIn : function(){
-            var $swp = obj.$warp.find(".swp"),
-                $video = obj.$warp.find(".video"),
-                $videoBtn = obj.$warp.find(".videoBtn"),
-                $close = $video.find(".close");
+//射线部分
+(function(){
+    var $oBiu = $main.find('.biu'),
+        $img = $oBiu.find('img'),
+        $ImgLength = $img.length - 1;
 
-            /*首屏滑入*/
-            $swp.eq(0).animate({
-                opacity:1,
-                left:0
-            },1500);
-            $swp.eq(1).animate({
-                opacity:1,
-                right:0
-            },1500);
-            $swp.eq(2).animate({
-                opacity:1,
-                top:80
-            },1000);
-            $swp.eq(3).animate({
-                opacity:1,
-                top:610
-            },1000);
+    setTimeout(function(){
+        $oBiu.show();
+        setTimeout(function(){
+            $oBiu.addClass('show');
+        },100);
+        $main.find('.inte').hide();
 
-            /*小视频弹窗*/
-            $videoBtn.click(function(){
-                $video.show();
-                $(document.body).addClass("noScroll");
-            });
-            $close.click(function(){
-                $video.hide();
-                $(document.body).removeClass("noScroll");
-            });
-            home.banner();
-            home.newInfo();
-            home.delayLoin();
-        },
-
-        /*新版本情报*/
-        newInfo : function(){
-            var $pop = obj.$newInf.find(".popWindow"),
-                $newsLi = obj.$newInf.find(".news li"),
-                $popLi = $pop.find("li"),
-                $maintxt = $pop.find(".maintxt"),
-                $close = $pop.find(".close"),
-                $btn = $pop.find(".btn span");
-
-            $maintxt.each(function(){
-                var $txt = $(this).find(".txt"),
-                    $scroll = $(this).find(".scroll"),
-                    $bar = $scroll.find(".bar"),
-                    txtH = $txt.height(),
-                    mainH = $(this).height(),
-                    barHeight = mainH*mainH/txtH,
-                    maxTop = mainH - barHeight,
-                    minTop = 0,
-                    index=0;
-                $bar.height(barHeight);
-
-                /*鼠标滚动*/
-                $maintxt.mousewheel(function(e,d){
-                    var top = $bar.position().top;
-                    if (d<0){
-                        top+=10;
-                    }else {
-                        top-=10;
-                    }
-                    top = Math.max(top,minTop);
-                    top = Math.min(top,maxTop);
-                    $bar.css("top",top);
-                    $txt.css("top",-txtH*top/mainH);
-                    return false;
-                });
-
-                /*滚动条拖动*/
-                $bar.mousedown(function(e){
-                    var y = e.clientY,
-                        barTop = $(this).position().top;
-                    $(document).mousemove(function(e){
-                        var moveY = e.clientY - y,
-                            top = barTop+moveY;
-                        top = Math.max(top,minTop);
-                        top = Math.min(top,maxTop);
-                        $bar.css("top",top);
-                        $txt.css("top",-txtH*top/mainH);
-                    }).mouseup(function(){
-                        $(this).off("mousemove").off("mouseup");
-                    });
-                    return false;
-                });
-
-                /*点击空白滚动栏*/
-                $scroll.click(function(e){
-                    if  (e.target === this){
-                        var y = e.clientY - ($maintxt.position().top + $scroll.position().top+$bar.height()),
-                            top = $bar.position().top;
-                        top = y>top?top+100:top-100;
-                        top = Math.max(top,minTop);
-                        top = Math.min(top,maxTop);
-                        $bar.stop().animate({top:top},500);
-                        $txt.stop().animate({top:-txtH*top/mainH},500);
-                    }
-                });
-            });
-            $pop.hide().css("opacity",1);;
-            $popLi.hide();
-
-            /*最新情报点击弹窗*/
-            $newsLi.click(function(){
-                index = $(this).index();
-                $pop.show();
-                $(document.body).addClass("noScroll");
-                $popLi.eq(index).show().siblings().hide();
-            });
-            $close.click(function(){
-                $pop.hide();
-                $(document.body).removeClass("noScroll");
-            });
-
-            /*弹窗后的左右切换*/
-            $btn.click(function(){
-                if ($(this).index()){
-                    index++;
-                    index = index%$popLi.length;
-                    $popLi.eq(index).show().siblings().hide();
-                }else {
-                    index--;
-                    if (index<0) index = $popLi.length-1;
-                    $popLi.eq(index).show().siblings().hide();
-                }
-            });
-        },
-
-        /*3D轮播*/
-        banner : function(){
-            var $game = $("#gameSpecial"),
-                $liList = $game.find(".banner .img ul li"),
-                index = 0,
-                $btn = $game.find(".banner .btn span"),
-                length = $liList.length;
-
-            $liList.click(function(){
-                if ($(this).index()!==index){
-                    index = $(this).index();
-                    var leftIndex = index-1,
-                        rightIndex = index+1;
-                    if (leftIndex<0) leftIndex = length-1;
-                    if (rightIndex>=length) rightIndex = 0;
-                    $liList.removeClass("left middle right");
-                    $liList.eq(leftIndex).addClass("left");
-                    $liList.eq(index).addClass("middle");
-                    $liList.eq(rightIndex).addClass("right");
-                }
-            });
-
-            /*左右切换*/
-            $btn.click(function(){
-                if($(this).index()){
-                    index++;
-                    index%=length;
-                }
-                else {
-                    index--;
-                    if (index<0) index = length-1;
-                }
-                var leftIndex = index-1,
-                    rightIndex = index+1;
-                if (leftIndex<0) leftIndex = length-1;
-                if (rightIndex>=length) rightIndex = 0;
-                $liList.removeClass("left middle right");
-                $liList.eq(leftIndex).addClass("left");
-                $liList.eq(index).addClass("middle");
-                $liList.eq(rightIndex).addClass("right");
-            });
-        },
-
-        /*加载延迟效果*/
-        delayLoin :function(){
-            var $game = $("#gameSpecial"),
-                $foot = $("#foot"),
-                $gamep = $game.find(".mainBody p"),
-                $banner = $game.find(".mainBody .banner"),
-                $p = obj.$newInf.find(".news p"),
-                $liList = obj.$newInf.find(".news ul li"),
-                objArr = [];
-            int($p,$liList,$gamep,$banner,$foot);
-            $(window).scroll(function(){
-                var top = $(document).scrollTop()+$(window).height();
-                for (var i=objArr.length-1;i>=0;i--){
-                    if (top > (objArr[i].offset().top-200)){
-                        var obj = objArr[i];
-                        (function(){
-                            var $This= obj;
-                            setTimeout(function(){
-                                $This.removeClass("hide");
-                            },$This.index()%10*200);
-                            objArr.slice(i,1);
-                        })();
-                    }
-                }
-            });
-
-            function int(){
-                for (var i=0,j=arguments.length;i<j;i++){
-                    arguments[i].each(function(){
-                        objArr.push($(this));
-                    });
-                }
-            }
-
+        var time = [500,1000,1500,2000];
+        for(var i = 0; i < $ImgLength; i++){
+            (function(i){
+                setTimeout(function(i){
+                    $img.eq(i).addClass('show');
+                    setTimeout(function(i){
+                        $img.eq(i).hide();
+                    },2000,i);
+                },time[i], i);
+            })(i);
         }
-    };
-    home.fadeIn();
-}();
+
+        for(var i = 0; i < $ImgLength; i++){
+            (function(i){
+                setTimeout(function(i){
+                    $boom = $img.eq($ImgLength);
+                    $boom.addClass('boom'+(i+1));
+                    if(i === $ImgLength-1){
+                        setTimeout(function(){
+                            $boom.addClass('boom5');
+                            setTimeout(function(){
+                                $boom.addClass('null');
+                                setTimeout(function(){
+                                    $oBiu.hide();
+                                },2000);
+                            },500);
+                        },1000);
+                    }
+                },time[i]+1200, i);
+            })(i);
+        }
+    },2500);
+})();
+
+//字母组合,字母分解
+(function(){
+    var $print = $main.find('.print'),
+        $i = $print.find('i'),
+        $iLenght = $i.length;
+    var $mask = $print.find('i.mask');
+
+    //特效部分
+    setTimeout(function(){
+        $print.addClass('show');
+        setTimeout(function(){
+            $print.addClass('show2').removeClass('show');
+            setTimeout(function(){
+                for(var i = 0; i < $iLenght; i++){
+                    (function(i){
+                        setTimeout(function(i){
+                            $i.eq(i).addClass('show');
+                            setTimeout(function(){
+                                $mask.removeClass('hide');
+                                $i.eq(i).removeClass('show');
+                            },10000);
+                            if(i === $iLenght - 1){
+                                $mask.addClass('hide');
+                                setTimeout(function(){
+                                    $print.addClass('replace');
+                                },1500);
+                            }
+                        },i*100, i);
+                    })(i);
+                }
+            },1000);
+        },1000);
+    },9200);
+
+    //按钮部分
+    (function(){
+        var $btn_warp = $main.find('.btn_warp'),
+            $pointer = $print.find('.pointer'),
+            $length = $pointer.length,
+            $btn = $btn_warp.find('.btn');
+
+        var $Btn_music = $('.Btn_music');
+
+        setTimeout(function(){
+            $btn_warp.show();
+            setTimeout(function(){
+                $btn_warp.addClass('show');
+            },1000);
+        },26100);
+
+        var timer = null;
+
+        $btn.hover(function(){
+            clearTimeout(timer);
+            $Btn_music.html("");
+            $aud = $('<audio src="music/btn_hover.mp3" autoplay="autoplay"></audio>');
+            $Btn_music.append($aud);
+            timer = setTimeout(function(){
+                $Btn_music.html("");
+            },900);
+            if ($(this).index()===0) {
+                fn('addClass', 'btn-index')
+            }else if ($(this).index()===1){
+                fn('addClass', 'btn-h5')
+            }else {
+                fn('addClass', 'btn-home')
+            }
+        },function(){
+            if ($(this).index()===0) {
+                fn('removeClass', 'btn-index')
+            }else if ($(this).index()===1){
+                fn('removeClass', 'btn-h5')
+            }else {
+                fn('removeClass', 'btn-home')
+            }
+        });
+
+        function fn(mod, className){
+            for(var i = 0; i < $length; i ++){
+                mod==='addClass'?$pointer.eq(i).addClass(className):$pointer.eq(i).removeClass(className);
+            }
+        }
+
+
+    })();
+})();
